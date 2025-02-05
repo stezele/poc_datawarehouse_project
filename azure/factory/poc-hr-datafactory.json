@@ -1,0 +1,9 @@
+{
+	"name": "poc-hr-datafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b8634f42-c695-4a8c-81bc-b33507a127a7",
+		"tenantId": "3473bed0-b1b4-4a8a-af88-34284fa45741"
+	}
+}
