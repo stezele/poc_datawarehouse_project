@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "poc-hr-datafactory"
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"BlobStoragehe_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "poc-server-hr.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "PoCDataWareuse"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "poc-server"
+		}
+	}
+}
