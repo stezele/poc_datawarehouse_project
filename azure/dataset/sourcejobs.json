@@ -1,0 +1,32 @@
+{
+	"name": "sourcejobs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BlobStoragehe",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "jobs.csv",
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1",
+				"type": "String"
+			},
+			{
+				"name": "Marketing Assistant",
+				"type": "String"
+			}
+		]
+	}
+}
