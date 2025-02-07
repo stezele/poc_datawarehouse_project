@@ -20,7 +20,8 @@ CREATE TABLE silver.hired_employees (
 	name			NVARCHAR(50),
 	datetime		NVARCHAR(50),
 	department_id   INT,
-	job_id          INT
+	job_id          INT,
+	dwh_create_date		DATETIME2 DEFAULT GETDATE()
 );
 
 
@@ -29,7 +30,8 @@ IF OBJECT_ID ('silver.departments', 'U') IS NOT NULL
 	DROP TABLE silver.departments;
 CREATE TABLE silver.departments (
 	id		    INT,
-	department	NVARCHAR(50)
+	department	NVARCHAR(50),
+	dwh_create_date		DATETIME2 DEFAULT GETDATE()
 );
 
 
@@ -38,6 +40,7 @@ IF OBJECT_ID ('silver.jobs', 'U') IS NOT NULL
 	DROP TABLE silver.jobs;
 CREATE TABLE silver.jobs (
 	id		INT,
-	job 	NVARCHAR(50)
+	job 	NVARCHAR(50),
+	dwh_create_date		DATETIME2 DEFAULT GETDATE()
 );
 
