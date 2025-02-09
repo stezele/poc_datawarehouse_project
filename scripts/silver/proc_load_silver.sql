@@ -38,8 +38,7 @@ BEGIN
 			id,
 			department
 		FROM bronze.departments;
-
-		-- Loading silver.hired_employees
+  
 		PRINT '>> Truncating Table: silver.hired_employees';
 		TRUNCATE TABLE silver.hired_employees;
 		PRINT '>> Inserting Data Into: silver.hired_employees';
@@ -52,7 +51,9 @@ BEGIN
 		)
 		SELECT
 			id,
-			name,
+			CASE WHEN name IS NULL THEN 'n/a'
+				ELSE name
+			END,
 			CAST (datetime AS DATE) AS datetime,    -- cast 'datetime' to DATE 
 			CASE WHEN department_id IS NULL THEN 0
 				ELSE department_id
@@ -61,6 +62,25 @@ BEGIN
 				ELSE job_id
 			END AS job_id                            -- change null values for 0
 		FROM bronze.hired_employees;
+
+    -- Step 1: Calculate the average of the dates
+    WITH DateValues AS (
+        SELECT DATEDIFF(DAY, '2021-02-01', CAST(datetime AS DATE)) AS DateValue
+        FROM silver.hired_employees
+        WHERE datetime IS NOT NULL
+    ),
+    AverageDateValue AS (
+        SELECT AVG(DateValue) AS AvgDateValue
+        FROM DateValues
+    )
+
+    -- Step 2: Update NULL dates using the calculated average
+    UPDATE silver.hired_employees
+    SET datetime = CASE 
+                    WHEN datetime IS NULL 
+                    THEN CAST(DATEADD(DAY, (SELECT AvgDateValue FROM AverageDateValue), '2021-02-01') AS DATE)
+                    ELSE CAST(datetime AS DATE)
+                END;
 
 		--Loading silver.jobs
 		PRINT '>> Truncating Table: silver.jobs';
